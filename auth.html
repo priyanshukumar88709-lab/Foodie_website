@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login / Signup</title>
+
+<style>
+
+/* BODY */
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg,#F2BD12,#ffd966);
+    font-family: Arial;
+}
+
+/* BOX */
+.container{
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 300px;
+    text-align: center;
+}
+
+/* INPUT */
+input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* BUTTON */
+button{
+    width: 100%;
+    padding: 10px;
+    background: #F2BD12;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* LINK */
+.toggle{
+    margin-top: 10px;
+    cursor: pointer;
+    color: #F2BD12;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2 id="title">Login</h2>
+
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="handleAuth()">Login</button>
+
+    <p class="toggle" onclick="toggleForm()">Don't have account? Signup</p>
+
+</div>
+
+<script>
+
+let isLogin = true;
+
+function toggleForm(){
+    isLogin = !isLogin;
+
+    document.getElementById("title").textContent = isLogin ? "Login" : "Signup";
+    document.querySelector("button").textContent = isLogin ? "Login" : "Signup";
+    document.querySelector(".toggle").textContent = isLogin 
+        ? "Don't have account? Signup" 
+        : "Already have account? Login";
+}
+
+function handleAuth(){
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if(email === "" || password === ""){
+        alert("❌ Fill all fields");
+        return;
+    }
+
+    if(isLogin){
+        // LOGIN
+        let savedEmail = localStorage.getItem("email");
+        let savedPassword = localStorage.getItem("password");
+
+        if(email === savedEmail && password === savedPassword){
+            localStorage.setItem("isLoggedIn","true");
+            alert("Login Successful");
+            window.location.href = "index.html";
+        }else{
+            alert("Invalid Email or Password");
+        }
+
+    }else{
+        // SIGNUP
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
+
+        alert("✅ Signup Successful");
+        toggleForm(); // login pe switch
+    }
+}
+
+</script>
+
+</body>
+</html>
