@@ -205,9 +205,9 @@ subscribeBtn.addEventListener('click', (e) => {
     emailInput.value = "";
 });
 
-function logout(){
+function logout() {
     localStorage.removeItem("isLoggedIn");
-    window.location.href = "auth.html";
+    window.location.replace("auth.html");
 }
 
 

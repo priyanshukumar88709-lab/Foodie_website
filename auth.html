@@ -54,6 +54,7 @@ button{
 
 </style>
 
+
 </head>
 <body>
 
@@ -89,29 +90,29 @@ function handleAuth(){
     let password = document.getElementById("password").value;
 
     if(email === "" || password === ""){
-        alert("❌ Fill all fields");
+        alert("Fill all fields");
         return;
     }
 
-    if(isLogin){
-        // LOGIN
-        let savedEmail = localStorage.getItem("email");
-        let savedPassword = localStorage.getItem("password");
+  if(isLogin){
+    // LOGIN
+    let savedEmail = localStorage.getItem("email");
+    let savedPassword = localStorage.getItem("password");
 
-        if(email === savedEmail && password === savedPassword){
-            localStorage.setItem("isLoggedIn","true");
-            alert("Login Successful");
-            window.location.href = "index.html";
-        }else{
-            alert("Invalid Email or Password");
-        }
+    if(email === savedEmail && password === savedPassword){
+        localStorage.setItem("isLoggedIn","true");
+        alert("Login Successful");
+        window.location.replace("index.html");
+    }else{
+        alert("Invalid Email or Password");
+    }
 
     }else{
         // SIGNUP
         localStorage.setItem("email", email);
         localStorage.setItem("password", password);
 
-        alert("✅ Signup Successful");
+        alert("Signup Successful");
         toggleForm(); // login pe switch
     }
 }
